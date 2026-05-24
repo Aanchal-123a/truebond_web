@@ -9,6 +9,7 @@ import { IoIosSend } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlinePaperClip } from "react-icons/ai"
 import { GrClose } from "react-icons/gr"
+import { FaArrowDown } from "react-icons/fa";
 import { AuthContext } from '../context/AuthContext';
 import { createSocketConnection } from '../utils/socket';
 import MessageItem from './MessageItem'
@@ -214,10 +215,14 @@ const Chat = () => {
   }, [id])
 
 
-  // Auto-scroll to bottom
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+  // scroll to bottom
+
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+    })
+  }
 
   // Handle typing with debounce
   const handleTyping = () => {
@@ -508,6 +513,12 @@ const Chat = () => {
 
         {recipientTyping && <TypingIndicator />}
         <div ref={messagesEndRef} />
+
+        <button onClick={scrollToBottom}
+  className="fixed bottom-24 right-6 z-50 bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-all duration-300"
+>
+  <FaArrowDown size={18} />
+</button>
       </div>
 
       {/* Input Area */}
